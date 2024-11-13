@@ -51,7 +51,7 @@ public class LoginActivity extends AppCompatActivity {
 
             try {
                 // 서버 URL 설정 (실제 서버 URL로 변경 필요)
-                URL url = new URL("http://your_server_ip/login.php");
+                URL url = new URL("http://10.0.2.2/login.php");
                 HttpURLConnection conn = (HttpURLConnection) url.openConnection();
                 conn.setRequestMethod("POST");
                 conn.setDoOutput(true);
