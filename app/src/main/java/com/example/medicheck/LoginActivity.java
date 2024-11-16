@@ -1,5 +1,6 @@
 package com.example.medicheck;
 
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.View;
@@ -7,6 +8,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
+import org.json.JSONObject; // 이 부분을 추가합니다.
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
@@ -51,7 +53,7 @@ public class LoginActivity extends AppCompatActivity {
 
             try {
                 // 서버 URL 설정 (실제 서버 URL로 변경 필요)
-                URL url = new URL("http://10.0.2.2/login.php");
+                URL url = new URL("http://192.168.25.41/login.php");
                 HttpURLConnection conn = (HttpURLConnection) url.openConnection();
                 conn.setRequestMethod("POST");
                 conn.setDoOutput(true);
@@ -77,15 +79,28 @@ public class LoginActivity extends AppCompatActivity {
 
         @Override
         protected void onPostExecute(String result) {
-            // 서버 응답에 따라 결과 처리
-            if (result.equals("success")) {
-                Toast.makeText(LoginActivity.this, "Login successful!", Toast.LENGTH_SHORT).show();
-                // 로그인 성공 시 다른 화면으로 이동하는 등의 추가 작업 수행
-            } else if (result.equals("fail")) {
-                Toast.makeText(LoginActivity.this, "Invalid ID or password.", Toast.LENGTH_SHORT).show();
-            } else {
+            if (result == null) {
+                Toast.makeText(LoginActivity.this, "Connection error.", Toast.LENGTH_SHORT).show();
+                return;
+            }
+
+            try {
+                JSONObject jsonResponse = new JSONObject(result);
+                String status = jsonResponse.getString("status");
+
+                if ("success".equals(status)) {
+                    Toast.makeText(LoginActivity.this, "Login successful!", Toast.LENGTH_SHORT).show();
+                    Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+                    startActivity(intent);
+                    finish();
+                } else {
+                    Toast.makeText(LoginActivity.this, "Invalid ID or password.", Toast.LENGTH_SHORT).show();
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
                 Toast.makeText(LoginActivity.this, "Connection error.", Toast.LENGTH_SHORT).show();
             }
         }
+
+        }
     }
-}
