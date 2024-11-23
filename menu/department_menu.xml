@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:id="@+id/menu_internal_medicine" android:title="내과" />
+    <item android:id="@+id/menu_surgery" android:title="정형외과" />
+    <item android:id="@+id/menu_pediatrics" android:title="소아과" />
+    <item android:id="@+id/menu_ophthalmology" android:title="안과" />
+</menu>
