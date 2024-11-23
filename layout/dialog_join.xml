@@ -5,7 +5,13 @@
     android:orientation="vertical"
     android:background="@color/white"
     android:padding="16dp">
-
+    <TextView
+        android:id="@+id/tvNa"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="개인정보"
+        android:textSize="20dp"
+        android:layout_marginTop="8dp" />
     <!-- 이름 입력 필드 -->
     <EditText
         android:id="@+id/edtNa"
@@ -15,7 +21,15 @@
         android:inputType="textPersonName"
         android:textSize="20dp"
         />
-
+    <!-- 생년월일 입력 필드 -->
+    <EditText
+        android:id="@+id/edtBirth"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="생년월일 (YYYY-MM-DD)"
+        android:inputType="date"
+        android:textSize="20dp"
+        />
     <!-- 전화번호 입력 필드 -->
     <EditText
         android:id="@+id/edtPho"
@@ -53,14 +67,27 @@
             android:layout_height="wrap_content"
             android:text="여성" />
     </RadioGroup>
-
-    <!-- 생년월일 입력 필드 -->
+    <TextView
+        android:id="@+id/tvIdPw"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="아이디 및 비밀번호 설정"
+        android:textSize="20dp"
+        android:layout_marginTop="8dp" />
     <EditText
-        android:id="@+id/edtBirth"
+        android:id="@+id/edtId"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="생년월일 (YYYY-MM-DD)"
-        android:inputType="date"
+        android:hint="아이디"
+        android:inputType="textPersonName"
+        android:textSize="20dp"
+        />
+    <EditText
+        android:id="@+id/edtPw"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="비밀번호"
+        android:inputType="textPersonName"
         android:textSize="20dp"
         />
 
