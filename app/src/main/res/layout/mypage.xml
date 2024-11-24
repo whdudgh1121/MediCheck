@@ -1,0 +1,229 @@
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#F5F5F5">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <!-- 상단바 -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            android:padding="16dp">
+
+            <ImageButton
+                android:id="@+id/logo"
+                android:layout_width="30dp"
+                android:layout_height="70dp"
+                android:layout_margin="1dp"
+                android:layout_weight="1"
+                android:background="@null"
+                android:scaleType="fitCenter"
+                android:src="@drawable/medicheck_logo"/>
+            <!--                android:contentDescription="메디체크 로고" />-->
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:text="메디대학병원"
+                android:textSize="30sp" />
+
+            <ImageButton
+                android:id="@+id/buttonMenu"
+                android:layout_width="0dp"
+                android:layout_height="50dp"
+                android:layout_margin="5dp"
+                android:layout_weight="1"
+                android:src="@drawable/menu_bar"
+                android:scaleType="fitCenter"
+                android:contentDescription="메뉴 버튼"
+                android:background="@null"/>
+        </LinearLayout>
+
+        <!-- 구분선 -->
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="#BDBDBD" />
+
+        <!-- 프로필 섹션 -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center"
+            android:padding="16dp">
+
+            <LinearLayout
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                android:gravity="center"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="민지"
+                    android:textColor="#FFFFFF"
+                    android:textSize="20sp"
+                    android:gravity="center"
+                    android:textStyle="bold" />
+            </LinearLayout>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="김민지님,\n반갑습니다!"
+                android:textSize="20sp"
+                android:paddingStart="16dp"
+                android:gravity="center_vertical" />
+        </LinearLayout>
+
+        <!-- 정보 수정 섹션 -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="16dp">
+
+            <!-- 성명 -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center_vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="성명: 김민지"
+                    android:textSize="16sp"
+                    android:layout_weight="1" />
+
+                <Button
+                    android:id="@+id/editName"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="변경하기"
+                    android:textSize="14sp"
+                    android:backgroundTint="@color/blue"
+                    android:textColor="@color/white" />
+            </LinearLayout>
+
+            <!-- 연락처 -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center_vertical"
+                android:layout_marginTop="8dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="연락처: 010.8446.2663"
+                    android:textSize="16sp"
+                    android:layout_weight="1" />
+
+                <Button
+                    android:id="@+id/editPhone"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="변경하기"
+                    android:textSize="14sp"
+                    android:backgroundTint="@color/blue"
+                    android:textColor="@color/white" />
+            </LinearLayout>
+
+            <!-- 주소 -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center_vertical"
+                android:layout_marginTop="8dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="주소: 경기도 수원시 권선구 탐동"
+                    android:textSize="16sp"
+                    android:layout_weight="1" />
+
+                <Button
+                    android:id="@+id/editadress"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="변경하기"
+                    android:textSize="14sp"
+                    android:backgroundTint="@color/blue"
+                    android:textColor="@color/white" />
+            </LinearLayout>
+
+            <!-- 비밀번호 -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center_vertical"
+                android:layout_marginTop="8dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="비밀번호: **********"
+                    android:textSize="16sp"
+                    android:layout_weight="1" />
+
+                <Button
+                    android:id="@+id/editpassword"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="변경하기"
+                    android:textSize="14sp"
+                    android:backgroundTint="@color/blue"
+                    android:textColor="@color/white" />
+            </LinearLayout>
+        </LinearLayout>
+
+        <!-- 추가 항목 -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="16dp">
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="엄마"
+                android:layout_marginBottom="8dp"
+                android:padding="12dp"
+                android:minHeight="48dp" />
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="아빠"
+                android:layout_marginBottom="8dp"
+                android:padding="12dp"
+                android:minHeight="48dp" />
+
+            <Button
+                android:id="@+id/editperson"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="+"
+                android:layout_gravity="center"
+                android:backgroundTint="@color/blue" />
+        </LinearLayout>
+    </LinearLayout>
+</ScrollView>

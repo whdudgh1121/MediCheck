@@ -1,4 +1,4 @@
-package com.example.projectme;
+package com.example.medicheck;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
@@ -11,6 +11,8 @@ import android.widget.EditText;
 import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.medicheck.MainActivity;
+
 public class Login extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -21,10 +23,12 @@ public class Login extends AppCompatActivity {
         Button btnlogin, btnJoin,btnTest;
 
         // 로그인 변수 연결
+        btnlogin = findViewById(R.id.Btnlogin);
         btnJoin = findViewById(R.id.BtnJoin);
-
         btnTest = findViewById(R.id.btnTest);
 
+
+        //메인으로 이동, 추후 삭제 예정
         btnTest.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -46,7 +50,10 @@ public class Login extends AppCompatActivity {
                 EditText dlgEdtBirth = dialogView.findViewById(R.id.edtBirth);
                 EditText dlgEdtGuNa = dialogView.findViewById(R.id.edtGuName);
                 EditText dlgEdtGuPho = dialogView.findViewById(R.id.edtGuPho);
+                EditText dlgEdtId = dialogView.findViewById(R.id.edtId);
+                EditText dlgEdtPw = dialogView.findViewById(R.id.edtPw);
                 CheckBox dlgCbGu = dialogView.findViewById(R.id.cbGuard);
+
 
                 // 보호자 정보 입력 체크박스 상태 여부
                 dlgCbGu.setOnCheckedChangeListener((buttonView, isChecked) -> {
@@ -69,12 +76,14 @@ public class Login extends AppCompatActivity {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         String name = dlgEdtNa.getText().toString();
-                        String phone = dlgEdtPho.getText().toString();
                         String birth = dlgEdtBirth.getText().toString();
+                        String phone = dlgEdtPho.getText().toString();
+                        String id = dlgEdtId.getText().toString();
+                        String pw = dlgEdtPw.getText().toString();
                         String guardianName = dlgEdtGuNa.getText().toString();
                         String guardianPhone = dlgEdtGuPho.getText().toString();
 
-                        if (name.isEmpty() || phone.isEmpty() || birth.isEmpty()) {
+                        if (name.isEmpty() || phone.isEmpty() || birth.isEmpty() || id.isEmpty() || pw.isEmpty()) {
                             Toast.makeText(getApplicationContext(), "필수 정보를 모두 입력해주세요.", Toast.LENGTH_SHORT).show();
                         } else {
                             if (dlgCbGu.isChecked() && (guardianName.isEmpty() || guardianPhone.isEmpty())) {
