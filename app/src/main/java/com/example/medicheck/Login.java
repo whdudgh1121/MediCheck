@@ -11,8 +11,6 @@ import android.widget.EditText;
 import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.example.medicheck.MainActivity;
-
 public class Login extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -105,5 +103,4 @@ public class Login extends AppCompatActivity {
                 dlg.show(); // 팝업창 보이기
             }
         });
-    }
-}
+    }}
