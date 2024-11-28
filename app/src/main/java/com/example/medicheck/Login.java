@@ -4,6 +4,7 @@ import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
@@ -17,28 +18,34 @@ public class Login extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.login);
 
+        Log.d("LoginActivity", "onCreate called"); // 이 로그가 출력되는지 확인
+
+
         // login.xml 변수
-        Button btnlogin, btnJoin,btnTest;
+        Button btnlogin, BtnJoin,btnTest;
 
         // 로그인 변수 연결
         btnlogin = findViewById(R.id.Btnlogin);
-        btnJoin = findViewById(R.id.BtnJoin);
+        BtnJoin = findViewById(R.id.BtnJoin);
         btnTest = findViewById(R.id.btnTest);
-
 
         //메인으로 이동, 추후 삭제 예정
         btnTest.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                Log.d("ButtonTest", "Test button clicked"); // 로그 출력
                 Intent intent = new Intent(Login.this, MainActivity.class);
                 startActivity(intent);
                 finish();
             }
         });
         // Dialog_Join 팝업창 생성
-        btnJoin.setOnClickListener(new View.OnClickListener() {
+        BtnJoin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
+                Log.d("ButtonTest", "Join button clicked"); // 로그 출력
+
                 // dialog_join.xml 파일 인플레이트
                 View dialogView = View.inflate(Login.this, R.layout.dialog_join, null);
 

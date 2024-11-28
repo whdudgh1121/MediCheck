@@ -74,8 +74,8 @@
             android:layout_margin="5dp"
             android:backgroundTint="#50bcdf"
             android:text="가입하기"
-            android:textSize="12sp"
-            android:textColor="#ffffff"/>
+            android:enabled="true"
+            android:textSize="12sp"/>
     </LinearLayout>
 
 </LinearLayout>
