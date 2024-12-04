@@ -1,13 +1,18 @@
 package com.example.medicheck;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
+
 import org.json.JSONObject; // 이 부분을 추가합니다.
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
@@ -17,19 +22,38 @@ import java.net.URL;
 
 public class LoginActivity extends AppCompatActivity {
 
+    // 로그인 관련 변수
     private EditText editTextId, editTextPassword;
-    private Button btnLogin, btnJoin;
+    private Button btnLogin, btnJoin, btnTest;
+
+    // 회원가입 팝업 관련 변수
+    private EditText dlgEdtNa, dlgEdtPho, dlgEdtBirth, dlgEdtGuNa, dlgEdtGuPho, dlgEdtId, dlgEdtPw;
+    private CheckBox dlgCbGu;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.login);
 
-        // 아이디와 비밀번호 입력 필드 및 로그인/가입 버튼 초기화
+        Log.d("LoginActivity", "onCreate called"); // 이 로그가 출력되는지 확인
+
+        // 로그인 관련 변수 연결
         editTextId = findViewById(R.id.editTextId);
         editTextPassword = findViewById(R.id.editTextPassword);
         btnLogin = findViewById(R.id.Btnlogin);
         btnJoin = findViewById(R.id.BtnJoin);
+        btnTest = findViewById(R.id.btnTest);
+
+        // Test 버튼 클릭 시 MainActivity로 이동 (추후 삭제 예정)
+        btnTest.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Log.d("ButtonTest", "Test button clicked"); // 로그 출력
+                Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+                startActivity(intent);
+                finish();
+            }
+        });
 
         // 로그인 버튼 클릭 시 LoginTask 실행
         btnLogin.setOnClickListener(new View.OnClickListener() {
@@ -38,6 +62,76 @@ public class LoginActivity extends AppCompatActivity {
                 String id = editTextId.getText().toString().trim(); // 아이디 입력값 가져오기
                 String password = editTextPassword.getText().toString().trim(); // 비밀번호 입력값 가져오기
                 new LoginTask().execute(id, password); // LoginTask를 실행하여 서버에 로그인 요청
+            }
+        });
+
+        // 회원가입 버튼 클릭 시 팝업창 띄우기
+        btnJoin.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Log.d("ButtonTest", "Join button clicked"); // 로그 출력
+
+                // dialog_join.xml 파일 인플레이트
+                View dialogView = View.inflate(LoginActivity.this, R.layout.dialog_join, null);
+
+                // 팝업창 변수 연결
+                dlgEdtNa = dialogView.findViewById(R.id.edtNa);
+                dlgEdtPho = dialogView.findViewById(R.id.edtPho);
+                dlgEdtBirth = dialogView.findViewById(R.id.edtBirth);
+                dlgEdtGuNa = dialogView.findViewById(R.id.edtGuName);
+                dlgEdtGuPho = dialogView.findViewById(R.id.edtGuPho);
+                dlgEdtId = dialogView.findViewById(R.id.edtId);
+                dlgEdtPw = dialogView.findViewById(R.id.edtPw);
+                dlgCbGu = dialogView.findViewById(R.id.cbGuard);
+
+                // 보호자 정보 입력 체크박스 상태 여부
+                dlgCbGu.setOnCheckedChangeListener((buttonView, isChecked) -> {
+                    if (isChecked) {
+                        dlgEdtGuNa.setVisibility(View.VISIBLE);
+                        dlgEdtGuPho.setVisibility(View.VISIBLE);
+                    } else {
+                        dlgEdtGuNa.setVisibility(View.GONE);
+                        dlgEdtGuPho.setVisibility(View.GONE);
+                    }
+                });
+
+                // AlertDialog.Builder 생성 -> 대화상자 생성
+                AlertDialog.Builder dlg = new AlertDialog.Builder(LoginActivity.this);
+                dlg.setTitle("회원가입 정보 입력");
+                dlg.setView(dialogView); // 대화상자
+
+                // setPositiveButton
+                dlg.setPositiveButton("확인", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        String name = dlgEdtNa.getText().toString();
+                        String birth = dlgEdtBirth.getText().toString();
+                        String phone = dlgEdtPho.getText().toString();
+                        String id = dlgEdtId.getText().toString();
+                        String pw = dlgEdtPw.getText().toString();
+                        String guardianName = dlgEdtGuNa.getText().toString();
+                        String guardianPhone = dlgEdtGuPho.getText().toString();
+
+                        if (name.isEmpty() || phone.isEmpty() || birth.isEmpty() || id.isEmpty() || pw.isEmpty()) {
+                            Toast.makeText(getApplicationContext(), "필수 정보를 모두 입력해주세요.", Toast.LENGTH_SHORT).show();
+                        } else {
+                            if (dlgCbGu.isChecked() && (guardianName.isEmpty() || guardianPhone.isEmpty())) {
+                                Toast.makeText(getApplicationContext(), "보호자 정보를 입력해주세요.", Toast.LENGTH_SHORT).show();
+                            } else {
+                                Toast.makeText(getApplicationContext(), "가입을 완료하였습니다.", Toast.LENGTH_SHORT).show();
+                            }
+                        }
+                    }
+                });
+
+                dlg.setNegativeButton("취소", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        Toast.makeText(getApplicationContext(), "가입을 취소하였습니다.", Toast.LENGTH_SHORT).show();
+                    }
+                });
+
+                dlg.show(); // 팝업창 보이기
             }
         });
     }
@@ -101,6 +195,5 @@ public class LoginActivity extends AppCompatActivity {
                 Toast.makeText(LoginActivity.this, "Connection error.", Toast.LENGTH_SHORT).show();
             }
         }
-
-        }
     }
+}

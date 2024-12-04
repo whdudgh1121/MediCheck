@@ -1,14 +1,16 @@
 package com.example.medicheck;
 
 import android.app.Dialog;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CalendarView;
 import android.widget.EditText;
+import android.widget.ImageButton;
+import android.widget.PopupMenu;
 import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
-
 import java.util.HashMap;
 
 public class MainActivity extends AppCompatActivity {
@@ -22,16 +24,14 @@ public class MainActivity extends AppCompatActivity {
     // 날짜별 내용을 저장하기 위한 HashMap
     private HashMap<String, String> diaryMap;
 
-    private String selectedDate;
-    // 선택된 날짜를 저장
-
-
+    private String selectedDate; // 선택된 날짜를 저장
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        // 캘린더 관련 초기화
         calendarV = findViewById(R.id.cal);
 
         // 다이얼로그 초기화
@@ -47,6 +47,7 @@ public class MainActivity extends AppCompatActivity {
         // HashMap 초기화
         diaryMap = new HashMap<>();
 
+        // 캘린더 날짜 선택 리스너
         calendarV.setOnDateChangeListener((view, year, month, dayOfMonth) -> {
             // 선택된 날짜 포맷
             selectedDate = year + "-" + (month + 1) + "-" + dayOfMonth;
@@ -100,6 +101,32 @@ public class MainActivity extends AppCompatActivity {
 
             // 다이얼로그 닫기
             diaryDlg.dismiss();
+        });
+
+        // 메뉴 관련 초기화
+        ImageButton buttonMenu = findViewById(R.id.buttonMenu);
+
+        // 메뉴 버튼 클릭 시 팝업 메뉴 표시
+        buttonMenu.setOnClickListener(view -> {
+            PopupMenu popupMenu = new PopupMenu(MainActivity.this, buttonMenu);
+            popupMenu.getMenuInflater().inflate(R.menu.popup_menu, popupMenu.getMenu());
+
+            // 메뉴 항목 클릭 시 이벤트 처리
+            popupMenu.setOnMenuItemClickListener(item -> {
+                if (item.getItemId() == R.id.search_box) {
+                    // 진료 내역 확인하기로 이동
+                    startActivity(new Intent(MainActivity.this, SearchBox.class));
+                    return true;
+                } else if (item.getItemId() == R.id.menu_profile) {
+                    // 프로필/비상연락처 등록으로 이동
+                    startActivity(new Intent(MainActivity.this, MyPageActivity.class));
+                    return true;
+                } else {
+                    return false;
+                }
+            });
+
+            popupMenu.show();
         });
     }
 }
