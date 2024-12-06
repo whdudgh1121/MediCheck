@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#F5F5F5">
 
-    <!-- 상단 로고와 메뉴 버튼 -->
-    <!--로고,  메뉴 버튼 -->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -23,6 +23,7 @@
             android:background="@null"
             android:scaleType="fitCenter"
             android:src="@drawable/medicheck_logo"
+            android:contentDescription="앱 로고"
             />
 
         <TextView
@@ -46,112 +47,97 @@
     </LinearLayout>
 
     <!-- 구분선 -->
+    <androidx.appcompat.widget.SearchView
+        android:id="@+id/search_view"
+        android:layout_width="match_parent"
+        android:layout_height="61dp"
+        android:background="@color/white"
+        app:iconifiedByDefault="false"
+        app:queryHint="검색어를 입력하시오"
+        />
     <View
         android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:background="#BDBDBD" />
+        android:layout_height="10dp"
+        />
 
-    <!-- 스크롤 가능한 내용 -->
-
+    <!--스크롤-->
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1">
 
-
-
-
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:padding="16dp">
+            android:padding="20dp">
+
             <TextView
+                android:id="@+id/tvChoice1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
                 android:text="진료과 선택항목"
-                android:textSize="20sp" />
+                android:textSize="25sp" />
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight="9"
-                >
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:layout_weight="8"
-                    android:text="진료과"
-                    android:textSize="18sp" />
+                android:layout_weight="9">
 
-                <ImageButton
-                    android:id="@+id/btn_department"
+                <Spinner
+                    android:id="@+id/spinner_departments"
                     android:layout_width="0dp"
-                    android:layout_height="30dp"
-                    android:layout_margin="5dp"
-                    android:layout_weight="1"
-                    android:background="@null"
-                    android:contentDescription="메뉴 버튼"
-                    android:scaleType="fitCenter"
-                    android:src="@drawable/arrow" />
+                    android:layout_height="48dp"
+                    android:layout_weight="8"
+                    android:spinnerMode="dropdown"
+
+                    android:textSize="22sp" />
+
+
+
             </LinearLayout>
+
             <TextView
+                android:id="@+id/tvChoice2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
                 android:text="진료과 선택항목"
-                android:textSize="20sp" />
+                android:textSize="25sp" />
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight="9"
-                >
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:layout_weight="8"
-                    android:text="진료과"
-                    android:textSize="18sp" />
+                android:layout_weight="9">
 
-                <ImageButton
-                    android:id="@+id/btn_disease"
+                <Spinner
+                    android:id="@+id/spinner_diseases"
                     android:layout_width="0dp"
-                    android:layout_height="30dp"
-                    android:layout_margin="5dp"
-                    android:layout_weight="1"
-                    android:src="@drawable/arrow"
-                    android:scaleType="fitCenter"
-                    android:contentDescription="메뉴 버튼"
-                    android:background="@null"/>
-            </LinearLayout>
-            <Button
-                android:id="@+id/btn_check"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
-                android:backgroundTint="#00BCD4"
-                android:text="진료 내역 확인하기"
-                android:textColor="#FFFFFF"
-                android:textSize="18sp" />
+                    android:layout_height="48dp"
+                    android:layout_weight="8"
+                    android:spinnerMode="dropdown"
+                    android:textSize="22sp" />
 
+            </LinearLayout>
         </LinearLayout>
     </ScrollView>
-    <!--스크롤 영역 끝-->
-    <!-- 하단 바 -->
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/white"
         android:orientation="horizontal"
         android:backgroundTint="#f5f5f5"
-        android:padding="5dp">
-        <TextView
+        android:padding="20dp">
+        <Button
+            android:id="@+id/btn_check"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text=" "
-            />
+            android:layout_marginTop="16dp"
+            android:backgroundTint="@color/blue"
+            android:text="진료 내역 확인하기"
+            android:textColor="#FFFFFF"
+            android:textSize="18sp" />
 
     </LinearLayout>
 </LinearLayout>

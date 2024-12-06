@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- 진료과 이름 배열 -->
+    <string-array name="de_array">
+        <item>내과</item>
+        <item>정형외과</item>
+        <item>소아과</item>
+        <item>안과</item>
+        <item>진료과 이름</item> <!--hint-->
+    </string-array>
+
+    <!-- 질병 이름 배열 -->
+    <string-array name="di_array">
+        <item>소화기 질환</item>
+        <item>호흡기 질환</item>
+        <item>신장 질환</item>
+        <item>내분비 질환</item>
+        <item>면역 질환</item>
+        <item>혈액 질환</item>
+        <item>선천성 대사 장애</item>
+        <item>성병</item>
+        <item>암</item>
+        <item>정신 질환</item>
+        <item>안구 질환</item>
+        <item>소아과 질환</item>
+        <item>질병 이름</item> <!--hint-->
+    </string-array>
+    <string-array name="departments_array" />
+</resources>
