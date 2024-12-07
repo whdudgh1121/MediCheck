@@ -120,4 +120,5 @@
         android:inputType="phone"
         android:textSize="20dp"
         />
+
 </LinearLayout>

@@ -9,10 +9,17 @@ import android.widget.CalendarView;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
-import android.widget.PopupMenu;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
+
+import android.os.AsyncTask;
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
+import java.net.URL;
+import org.json.JSONArray;
+import org.json.JSONObject;
 
 import java.util.HashMap;
 
@@ -20,7 +27,7 @@ public class MainActivity extends AppCompatActivity {
 
     private CalendarView calendarV;
     private Dialog diaryDlg, menuDlg;
-    private TextView diaryTv;
+    private TextView diaryTv, btnNotication;
     private EditText contextEdt;
     private Button saveBtn, changeBtn, deleteBtn;
     private ImageButton btnMenu, btnLogo;
@@ -33,27 +40,31 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        // 초기화
+        // 뷰 초기화
         calendarV = findViewById(R.id.cal);
         btnMenu = findViewById(R.id.buttonMenu);
         btnLogo = findViewById(R.id.logo);
+        btnNotication = findViewById(R.id.btnNotication);
 
+        // 다이얼로그 초기화
         diaryDlg = new Dialog(this);
         diaryDlg.setContentView(R.layout.dialog_cal);
 
-        // 다이얼로그에서 사용될 뷰 초기화
+        menuDlg = new Dialog(this);
+        menuDlg.setContentView(R.layout.dialog_menu);
+
+        // 다이얼로그 내 뷰 초기화
         diaryTv = diaryDlg.findViewById(R.id.diaryTextView);
         contextEdt = diaryDlg.findViewById(R.id.contextEditText);
         saveBtn = diaryDlg.findViewById(R.id.save_Btn);
         changeBtn = diaryDlg.findViewById(R.id.cha_Btn);
         deleteBtn = diaryDlg.findViewById(R.id.del_Btn);
 
-        // 메뉴 다이얼로그 초기화
-        menuDlg = new Dialog(this);
-        menuDlg.setContentView(R.layout.dialog_menu);
-
         // HashMap 초기화
         diaryMap = new HashMap<>();
+
+        // 알림 데이터 가져오기
+        fetchNotices();
 
         // 캘린더 날짜 선택 리스너
         calendarV.setOnDateChangeListener((view, year, month, dayOfMonth) -> {
@@ -100,18 +111,15 @@ public class MainActivity extends AppCompatActivity {
         btnMenu.setOnClickListener(v -> {
             menuDlg.show();
 
-            // 다이얼로그 내 이미지 버튼 초기화 및 클릭 리스너 추가
             ImageView btnSearch = menuDlg.findViewById(R.id.meSearchImage);
             ImageView btnMyPage = menuDlg.findViewById(R.id.meUserImage);
 
-            // 검색 페이지 이동
             btnSearch.setOnClickListener(view -> {
                 Intent intent = new Intent(MainActivity.this, SearchBox.class);
                 startActivity(intent);
                 menuDlg.dismiss();
             });
 
-            // 마이페이지 이동
             btnMyPage.setOnClickListener(view -> {
                 Intent intent = new Intent(MainActivity.this, MyPageActivity.class);
                 startActivity(intent);
@@ -119,11 +127,64 @@ public class MainActivity extends AppCompatActivity {
             });
         });
 
-        // logo 버튼 클릭 리스너
+        // 로고 버튼 클릭 리스너
         btnLogo.setOnClickListener(v -> {
             Intent intent = new Intent(MainActivity.this, MainActivity.class);
             startActivity(intent);
             finish();
         });
+    }
+
+    // 네트워크 요청 함수
+    private void fetchNotices() {
+        new AsyncTask<Void, Void, String>() {
+            @Override
+            protected String doInBackground(Void... voids) {
+                try {
+                    URL url = new URL("http://192.168.25.32/notice.php");
+                    HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+                    conn.setRequestMethod("GET");
+
+                    BufferedReader reader = new BufferedReader(new InputStreamReader(conn.getInputStream()));
+                    StringBuilder result = new StringBuilder();
+                    String line;
+
+                    while ((line = reader.readLine()) != null) {
+                        result.append(line);
+                    }
+
+                    reader.close();
+                    return result.toString();
+                } catch (Exception e) {
+                    e.printStackTrace();
+                    return null;
+                }
+            }
+
+            @Override
+            protected void onPostExecute(String result) {
+                if (result != null) {
+                    parseJSON(result);
+                }
+            }
+        }.execute();
+    }
+
+    // JSON 파싱 함수
+    private void parseJSON(String json) {
+        try {
+            JSONArray jsonArray = new JSONArray(json);
+            StringBuilder notices = new StringBuilder();
+
+            for (int i = 0; i < jsonArray.length(); i++) {
+                JSONObject noticeObject = jsonArray.getJSONObject(i);
+                String notice = noticeObject.getString("notice");
+                notices.append(notice).append("\n");
+            }
+
+            btnNotication.setText(notices.toString());
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 }
