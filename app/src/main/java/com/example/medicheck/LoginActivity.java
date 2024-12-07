@@ -33,7 +33,9 @@ public class LoginActivity extends AppCompatActivity {
     private Button btnLogin, btnJoin, btnTest;
 
     // 회원가입 팝업 관련 변수
-    private EditText dlgEdtNa, dlgEdtPho, dlgEdtBirth, dlgEdtGuNa, dlgEdtGuPho, dlgEdtId, dlgEdtPw;
+    private EditText dlgEdtNa, dlgEdtPho, dlgEdtBirth, dlgEdtGuNa, dlgEdtGuPho, dlgEdtId, dlgEdtPw ;
+    private RadioGroup dlgGender;
+
     private CheckBox dlgCbGu;
 
     @Override
@@ -81,7 +83,7 @@ public class LoginActivity extends AppCompatActivity {
             dlgEdtId = dialogView.findViewById(R.id.edtId);
             dlgEdtPw = dialogView.findViewById(R.id.edtPw);
             dlgCbGu = dialogView.findViewById(R.id.cbGuard);
-
+            dlgGender = dialogView.findViewById(R.id.rgGe);
             dlgCbGu.setOnCheckedChangeListener((buttonView, isChecked) -> {
                 if (isChecked) {
                     dlgEdtGuNa.setVisibility(View.VISIBLE);
@@ -103,6 +105,8 @@ public class LoginActivity extends AppCompatActivity {
                 String birth = dlgEdtBirth.getText().toString();
                 String phone = dlgEdtPho.getText().toString();
                 String pw = dlgEdtPw.getText().toString();
+                int selectedGender = dlgGender.getCheckedRadioButtonId();
+                String gender = (selectedGender == R.id.rbMan) ? "M" : "F";
                 boolean hasGuardian = dlgCbGu.isChecked();
                 String guardianName = dlgEdtGuNa.getText().toString();
                 String guardianPhone = dlgEdtGuPho.getText().toString();
@@ -117,7 +121,7 @@ public class LoginActivity extends AppCompatActivity {
                     return;
                 }
 
-                submitUserData(id, name, birth, phone, pw, hasGuardian, guardianName, guardianPhone);
+                submitUserData(id, name, birth, phone, pw,gender, hasGuardian, guardianName, guardianPhone);
             });
 
             dlg.setNegativeButton("취소", (dialog, which) ->
@@ -128,7 +132,7 @@ public class LoginActivity extends AppCompatActivity {
         });
     }
 
-    private void submitUserData(String id, String name, String birth, String phone, String password, boolean hasGuardian, String guardianName, String guardianPhone) {
+    private void submitUserData(String id, String name, String birth, String phone, String password,String gender, boolean hasGuardian, String guardianName, String guardianPhone) {
         String url = "http://192.168.25.32/join.php"; // 서버 URL
         RequestQueue queue = Volley.newRequestQueue(this);
 
@@ -144,7 +148,7 @@ public class LoginActivity extends AppCompatActivity {
                 params.put("birth", birth);
                 params.put("phone", phone);
                 params.put("password", password);
-
+                params.put("sex", gender);
                 int currentYear = Calendar.getInstance().get(Calendar.YEAR);
                 int age = currentYear - Integer.parseInt(birth.substring(0, 4));
                 params.put("age", String.valueOf(age));
