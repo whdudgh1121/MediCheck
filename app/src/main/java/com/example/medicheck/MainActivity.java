@@ -114,12 +114,14 @@ public class MainActivity extends AppCompatActivity {
             ImageView btnSearch = menuDlg.findViewById(R.id.meSearchImage1);
             ImageView btnMyPage = menuDlg.findViewById(R.id.meUserImage1);
 
+            // 검색 페이지 이동
             btnSearch.setOnClickListener(view -> {
                 Intent intent = new Intent(MainActivity.this, SearchBox.class);
                 startActivity(intent);
                 menuDlg.dismiss();
             });
 
+            // 마이페이지 이동
             btnMyPage.setOnClickListener(view -> {
                 Intent intent = new Intent(MainActivity.this, MyPageActivity.class);
                 startActivity(intent);
@@ -127,7 +129,7 @@ public class MainActivity extends AppCompatActivity {
             });
         });
 
-        // 로고 버튼 클릭 리스너
+        // logo 버튼 클릭 리스너
         btnLogo.setOnClickListener(v -> {
             Intent intent = new Intent(MainActivity.this, MainActivity.class);
             startActivity(intent);
