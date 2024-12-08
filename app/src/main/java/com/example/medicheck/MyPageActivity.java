@@ -8,6 +8,7 @@ import android.graphics.drawable.GradientDrawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
@@ -36,6 +37,19 @@ public class MyPageActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.mypage);
+
+        Button edtNameButton = findViewById(R.id.edtName);
+        edtNameButton.setOnClickListener(v -> showNameChangeDialog());
+
+        Button edtPhoneButton = findViewById(R.id.edtPhone);
+        edtPhoneButton.setOnClickListener(v -> showPhoneChangeDialog());
+
+        Button edtAddressButton = findViewById(R.id.edtAdr);
+        edtAddressButton.setOnClickListener(v -> showAddressChangeDialog());
+
+        Button edtPasswordButton = findViewById(R.id.edtPassword);
+        edtPasswordButton.setOnClickListener(v -> showPasswordChangeDialog());
+
 
         btnMenu = findViewById(R.id.buttonMenu);
         btnLogo = findViewById(R.id.logo);
@@ -211,4 +225,152 @@ public class MyPageActivity extends AppCompatActivity {
 
         dialog.show();
     }
+    private void showNameChangeDialog() {
+        // 다이얼로그 뷰를 동적으로 가져오기
+        LayoutInflater inflater = LayoutInflater.from(this);
+        View dialogView = inflater.inflate(R.layout.dialog_name, null);
+
+        // 다이얼로그 내부의 뷰 참조
+        EditText inputName = dialogView.findViewById(R.id.editTextName);
+        Button btnSave = dialogView.findViewById(R.id.btnSave);
+        Button btnCancel = dialogView.findViewById(R.id.btnCancel);
+
+        // 기존 이름 표시 (예: "김민지")
+        TextView nameTextView = findViewById(R.id.userName); // 실제 이름 TextView ID로 교체 필요
+        String currentName = nameTextView.getText().toString();
+        inputName.setText(currentName);
+
+        // 다이얼로그 생성
+        AlertDialog dialog = new AlertDialog.Builder(this)
+                .setView(dialogView)
+                .setCancelable(false)
+                .create();
+
+        // 저장 버튼 클릭 리스너
+        btnSave.setOnClickListener(v -> {
+            String newName = inputName.getText().toString();
+
+            if (!TextUtils.isEmpty(newName)) {
+                // 이름 변경
+                nameTextView.setText(newName);
+                dialog.dismiss();
+                Toast.makeText(this, "이름이 변경되었습니다.", Toast.LENGTH_SHORT).show();
+            } else {
+                Toast.makeText(this, "이름을 입력해주세요.", Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        // 취소 버튼 클릭 리스너
+        btnCancel.setOnClickListener(v -> dialog.dismiss());
+
+        dialog.show();
+    }
+    // 연락처 변경 다이얼로그
+    private void showPhoneChangeDialog() {
+        LayoutInflater inflater = LayoutInflater.from(this);
+        View dialogView = inflater.inflate(R.layout.dialog_phone, null);
+
+        EditText inputPhone = dialogView.findViewById(R.id.editTextPhone); // 수정된 ID
+        Button btnSave = dialogView.findViewById(R.id.btnSave);
+        Button btnCancel = dialogView.findViewById(R.id.btnCancel);
+
+        TextView phoneTextView = findViewById(R.id.userPhone); // 기존 연락처 TextView
+        String currentPhone = phoneTextView.getText().toString();
+        inputPhone.setText(currentPhone);
+
+        AlertDialog dialog = new AlertDialog.Builder(this)
+                .setView(dialogView)
+                .setCancelable(false)
+                .create();
+
+        btnSave.setOnClickListener(v -> {
+            String newPhone = inputPhone.getText().toString();
+
+            if (!TextUtils.isEmpty(newPhone)) {
+                phoneTextView.setText(newPhone);
+                dialog.dismiss();
+                Toast.makeText(this, "연락처가 변경되었습니다.", Toast.LENGTH_SHORT).show();
+            } else {
+                Toast.makeText(this, "연락처를 입력해주세요.", Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        btnCancel.setOnClickListener(v -> dialog.dismiss());
+
+        dialog.show();
+    }
+
+
+    // 주소 변경 다이얼로그
+    private void showAddressChangeDialog() {
+        LayoutInflater inflater = LayoutInflater.from(this);
+        View dialogView = inflater.inflate(R.layout.dialog_address, null);
+
+        EditText inputAddress = dialogView.findViewById(R.id.editTextAdr);
+        Button btnSave = dialogView.findViewById(R.id.btnSave);
+        Button btnCancel = dialogView.findViewById(R.id.btnCancel);
+
+        TextView addressTextView = findViewById(R.id.userAdr); // 실제 주소 TextView ID로 교체 필요
+        String currentAddress = addressTextView.getText().toString();
+        inputAddress.setText(currentAddress);
+
+        AlertDialog dialog = new AlertDialog.Builder(this)
+                .setView(dialogView)
+                .setCancelable(false)
+                .create();
+
+        btnSave.setOnClickListener(v -> {
+            String newAddress = inputAddress.getText().toString();
+
+            if (!TextUtils.isEmpty(newAddress)) {
+                addressTextView.setText(newAddress);
+                dialog.dismiss();
+                Toast.makeText(this, "주소가 변경되었습니다.", Toast.LENGTH_SHORT).show();
+            } else {
+                Toast.makeText(this, "주소를 입력해주세요.", Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        btnCancel.setOnClickListener(v -> dialog.dismiss());
+
+        dialog.show();
+    }
+
+    // 비밀번호 변경 다이얼로그
+    private void showPasswordChangeDialog() {
+        LayoutInflater inflater = LayoutInflater.from(this);
+        View dialogView = inflater.inflate(R.layout.dialog_password, null);
+
+        EditText inputPassword = dialogView.findViewById(R.id.editTextPassword);
+        EditText inputConfirmPassword = dialogView.findViewById(R.id.editTextConfirmPassword);
+        Button btnSave = dialogView.findViewById(R.id.btnSave);
+        Button btnCancel = dialogView.findViewById(R.id.btnCancel);
+
+        AlertDialog dialog = new AlertDialog.Builder(this)
+                .setView(dialogView)
+                .setCancelable(false)
+                .create();
+
+        btnSave.setOnClickListener(v -> {
+            String newPassword = inputPassword.getText().toString();
+            String confirmPassword = inputConfirmPassword.getText().toString();
+
+            if (!TextUtils.isEmpty(newPassword) && newPassword.equals(confirmPassword)) {
+                Toast.makeText(this, "비밀번호가 변경되었습니다.", Toast.LENGTH_SHORT).show();
+                dialog.dismiss();
+            } else if (TextUtils.isEmpty(newPassword)) {
+                Toast.makeText(this, "비밀번호를 입력해주세요.", Toast.LENGTH_SHORT).show();
+            } else {
+                Toast.makeText(this, "비밀번호가 일치하지 않습니다.", Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        btnCancel.setOnClickListener(v -> dialog.dismiss());
+
+        dialog.show();
+    }
+
+
+
+
 }

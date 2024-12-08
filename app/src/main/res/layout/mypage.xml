@@ -97,10 +97,19 @@
                 android:orientation="horizontal"
                 android:gravity="center_vertical">
 
+
                 <TextView
+                    android:id="@+id/labelName"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="성명: 김민지"
+                    android:text="성명: "
+                    android:textSize="16sp" />
+
+                <TextView
+                    android:id="@+id/userName"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="김민지"
                     android:textSize="16sp"
                     android:layout_weight="1" />
 
@@ -122,12 +131,23 @@
                 android:gravity="center_vertical"
                 android:layout_marginTop="8dp">
 
+
+
                 <TextView
+                    android:id="@+id/labelPhone"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="연락처: 010.8446.2663"
-                    android:textSize="16sp"
-                    android:layout_weight="1" />
+                    android:text="연락처: "
+                    android:textSize="16sp" />
+
+
+                <TextView
+                    android:id="@+id/userPhone"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="010.8446.2663"
+                    android:textSize="16sp" />
 
                 <Button
                     android:id="@+id/edtPhone"
@@ -148,14 +168,22 @@
                 android:layout_marginTop="8dp">
 
                 <TextView
+                    android:id="@+id/labelAdr"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="주소: 경기도 수원시 권선구 탐동"
+                    android:text="주소: "
+                    android:textSize="16sp" />
+
+                <TextView
+                    android:id="@+id/userAdr"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="경기도 수원시 권선구 탑동"
                     android:textSize="16sp"
                     android:layout_weight="1" />
 
                 <Button
-                    android:id="@+id/edtAdress"
+                    android:id="@+id/edtAdr"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="변경하기"
@@ -173,9 +201,17 @@
                 android:layout_marginTop="8dp">
 
                 <TextView
+                    android:id="@+id/labelPassword"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="비밀번호: **********"
+                    android:text="비밀번호: "
+                    android:textSize="16sp" />
+
+                <TextView
+                    android:id="@+id/userPassword"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="****"
                     android:textSize="16sp"
                     android:layout_weight="1" />
 

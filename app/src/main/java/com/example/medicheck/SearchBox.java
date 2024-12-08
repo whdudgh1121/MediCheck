@@ -105,8 +105,8 @@ public class SearchBox extends AppCompatActivity {
             menuDlg.show();
 
             // 다이얼로그 내 이미지 버튼 초기화 및 클릭 리스너 추가
-            ImageView btnSearch = menuDlg.findViewById(R.id.meSearchImage);
-            ImageView btnMyPage = menuDlg.findViewById(R.id.meUserImage);
+            ImageView btnSearch = menuDlg.findViewById(R.id.meSearchImage2);
+            ImageView btnMyPage = menuDlg.findViewById(R.id.meUserImage2);
 
             // 검색 페이지 이동
             btnSearch.setOnClickListener(view -> {
