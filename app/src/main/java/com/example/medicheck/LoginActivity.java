@@ -1,7 +1,6 @@
 package com.example.medicheck;
 
 import android.app.AlertDialog;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -33,7 +32,7 @@ public class LoginActivity extends AppCompatActivity {
     private Button btnLogin, btnJoin, btnTest;
 
     // 회원가입 팝업 관련 변수
-    private EditText dlgEdtNa, dlgEdtPho, dlgEdtBirth, dlgEdtGuNa, dlgEdtGuPho, dlgEdtId, dlgEdtPw ;
+    private EditText dlgEdtNa, dlgEdtPho, dlgEdtBirth, dlgEdtGuNa, dlgEdtGuPho, dlgEdtId, dlgEdtPw;
     private RadioGroup dlgGender;
 
     private CheckBox dlgCbGu;
@@ -121,7 +120,7 @@ public class LoginActivity extends AppCompatActivity {
                     return;
                 }
 
-                submitUserData(id, name, birth, phone, pw,gender, hasGuardian, guardianName, guardianPhone);
+                submitUserData(id, name, birth, phone, pw, gender, hasGuardian, guardianName, guardianPhone);
             });
 
             dlg.setNegativeButton("취소", (dialog, which) ->
@@ -132,7 +131,7 @@ public class LoginActivity extends AppCompatActivity {
         });
     }
 
-    private void submitUserData(String id, String name, String birth, String phone, String password,String gender, boolean hasGuardian, String guardianName, String guardianPhone) {
+    private void submitUserData(String id, String name, String birth, String phone, String password, String gender, boolean hasGuardian, String guardianName, String guardianPhone) {
         String url = "http://192.168.25.32/join.php"; // 서버 URL
         RequestQueue queue = Volley.newRequestQueue(this);
 
@@ -195,6 +194,7 @@ public class LoginActivity extends AppCompatActivity {
             }
         }
 
+
         @Override
         protected void onPostExecute(String result) {
             if (result == null) {
@@ -207,8 +207,9 @@ public class LoginActivity extends AppCompatActivity {
                 String status = jsonResponse.getString("status");
 
                 if ("success".equals(status)) {
-                    Toast.makeText(LoginActivity.this, "Login successful!", Toast.LENGTH_SHORT).show();
+                    String userId = jsonResponse.getString("id"); // JSON에서 ID 추출
                     Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+                    intent.putExtra("userId", userId); // ID 전달
                     startActivity(intent);
                     finish();
                 } else {

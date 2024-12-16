@@ -3,25 +3,21 @@ package com.example.medicheck;
 import android.app.Dialog;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
-import android.widget.Button;
-import android.widget.CalendarView;
-import android.widget.EditText;
-import android.widget.ImageButton;
-import android.widget.ImageView;
-import android.widget.TextView;
-
+import android.widget.*;
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.os.AsyncTask;
-import java.io.BufferedReader;
-import java.io.InputStreamReader;
-import java.net.HttpURLConnection;
-import java.net.URL;
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
+
 import org.json.JSONArray;
 import org.json.JSONObject;
 
 import java.util.HashMap;
+import java.util.Map;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -39,7 +35,8 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
+        // LoginActivity에서 전달된 userId를 받음
+        String userId = getIntent().getStringExtra("userId");
         // 뷰 초기화
         calendarV = findViewById(R.id.cal);
         btnMenu = findViewById(R.id.buttonMenu);
@@ -64,7 +61,7 @@ public class MainActivity extends AppCompatActivity {
         diaryMap = new HashMap<>();
 
         // 알림 데이터 가져오기
-        fetchNotices();
+        fetchUserNotifications();
 
         // 캘린더 날짜 선택 리스너
         calendarV.setOnDateChangeListener((view, year, month, dayOfMonth) -> {
@@ -116,13 +113,16 @@ public class MainActivity extends AppCompatActivity {
 
             btnSearch.setOnClickListener(view -> {
                 Intent intent = new Intent(MainActivity.this, SearchBox.class);
+                intent.putExtra("userId", userId);
                 startActivity(intent);
                 menuDlg.dismiss();
             });
 
             btnMyPage.setOnClickListener(view -> {
                 Intent intent = new Intent(MainActivity.this, MyPageActivity.class);
+                intent.putExtra("userId", userId);
                 startActivity(intent);
+
                 menuDlg.dismiss();
             });
         });
@@ -135,56 +135,37 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
-    // 네트워크 요청 함수
-    private void fetchNotices() {
-        new AsyncTask<Void, Void, String>() {
-            @Override
-            protected String doInBackground(Void... voids) {
-                try {
-                    URL url = new URL("http://192.168.25.32/notice.php");
-                    HttpURLConnection conn = (HttpURLConnection) url.openConnection();
-                    conn.setRequestMethod("GET");
+    // 공지사항 데이터를 서버에서 가져오는 함수
+    private void fetchUserNotifications() {
+        String url = "http://192.168.25.32/notice.php"; // 공지사항 가져오는 PHP URL
 
-                    BufferedReader reader = new BufferedReader(new InputStreamReader(conn.getInputStream()));
-                    StringBuilder result = new StringBuilder();
-                    String line;
+        RequestQueue queue = Volley.newRequestQueue(this);
+        StringRequest stringRequest = new StringRequest(Request.Method.GET, url,
+                response -> {
+                    try {
+                        Log.d("ServerResponse", response);
 
-                    while ((line = reader.readLine()) != null) {
-                        result.append(line);
+                        // JSON 응답 처리
+                        JSONArray jsonArray = new JSONArray(response);
+                        StringBuilder notices = new StringBuilder();
+
+                        for (int i = 0; i < jsonArray.length(); i++) {
+                            JSONObject noticeObject = jsonArray.getJSONObject(i);
+                            String notice = noticeObject.getString("notice");
+                            notices.append(notice).append("\n");
+                        }
+
+                        btnNotication.setText(notices.toString());
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                        Toast.makeText(this, "Error parsing notifications", Toast.LENGTH_SHORT).show();
                     }
+                },
+                error -> {
+                    error.printStackTrace();
+                    Toast.makeText(this, "Server error: " + error.getMessage(), Toast.LENGTH_SHORT).show();
+                });
 
-                    reader.close();
-                    return result.toString();
-                } catch (Exception e) {
-                    e.printStackTrace();
-                    return null;
-                }
-            }
-
-            @Override
-            protected void onPostExecute(String result) {
-                if (result != null) {
-                    parseJSON(result);
-                }
-            }
-        }.execute();
-    }
-
-    // JSON 파싱 함수
-    private void parseJSON(String json) {
-        try {
-            JSONArray jsonArray = new JSONArray(json);
-            StringBuilder notices = new StringBuilder();
-
-            for (int i = 0; i < jsonArray.length(); i++) {
-                JSONObject noticeObject = jsonArray.getJSONObject(i);
-                String notice = noticeObject.getString("notice");
-                notices.append(notice).append("\n");
-            }
-
-            btnNotication.setText(notices.toString());
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+        queue.add(stringRequest);
     }
 }

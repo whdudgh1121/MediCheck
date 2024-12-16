@@ -11,22 +11,37 @@ import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.Toast;
+import android.widget.Button;
+
 
 import androidx.appcompat.app.AppCompatActivity;
 
 
 public class SearchBox extends AppCompatActivity {
 
-    private ImageButton btnSearch, btnMyPage,btnMenu, btnLogo;
+    private ImageButton btnSearch, btnMyPage,btnMenu, btnLogo,btn;
     private Dialog menuDlg;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.search_box);
-
+        androidx.appcompat.widget.SearchView searchView = findViewById(R.id.search_view);
+        Button btnCheck = findViewById(R.id.btn_check);
+        String userId = getIntent().getStringExtra("userId"); // MainActivity에서 받은 userId
+        btnCheck.setOnClickListener(v -> {
+            String query = searchView.getQuery().toString();
+            if (!query.isEmpty()) {
+                Intent intent = new Intent(SearchBox.this, TreatmentHistoryActivity.class);
+                intent.putExtra("searchQuery", query); // 검색어 전달
+                intent.putExtra("userId", userId); // userId 전달
+                startActivity(intent);
+            } else {
+                Toast.makeText(this, "검색어를 입력하세요.", Toast.LENGTH_SHORT).show();
+            }
+        });
         // 진료과 Spinner 설정
-        Spinner spinnerDepartments = findViewById(R.id.spinner_departments);
+        /*Spinner spinnerDepartments = findViewById(R.id.spinner_departments);
         ArrayAdapter<CharSequence> adapterDepartments = ArrayAdapter.createFromResource(
                 this,
                 R.array.de_array, // 연결된 배열 참조
@@ -88,7 +103,7 @@ public class SearchBox extends AppCompatActivity {
             public void onNothingSelected(AdapterView<?> parent) {
                 // 선택되지 않은 경우 처리
             }
-        });
+        });*/
 
 
 

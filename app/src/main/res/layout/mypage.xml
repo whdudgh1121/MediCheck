@@ -22,16 +22,14 @@
                 android:layout_width="30dp"
                 android:layout_height="70dp"
                 android:layout_margin="1dp"
-                android:layout_weight="1"
                 android:background="@null"
                 android:scaleType="fitCenter"
                 android:src="@drawable/medicheck_logo"
-                android:contentDescription="메디체크 로고"
-                />
+                android:contentDescription="메디체크 로고" />
 
             <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:gravity="center"
                 android:text="메디대학병원"
@@ -39,14 +37,13 @@
 
             <ImageButton
                 android:id="@+id/buttonMenu"
-                android:layout_width="0dp"
+                android:layout_width="30dp"
                 android:layout_height="50dp"
                 android:layout_margin="5dp"
-                android:layout_weight="1"
                 android:src="@drawable/menu_bar"
                 android:scaleType="fitCenter"
                 android:contentDescription="메뉴 버튼"
-                android:background="@null"/>
+                android:background="@null" />
         </LinearLayout>
 
         <!-- 구분선 -->
@@ -58,7 +55,7 @@
         <!-- 프로필 섹션 -->
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="194dp"
+            android:layout_height="wrap_content"
             android:gravity="center"
             android:orientation="horizontal"
             android:padding="20dp">
@@ -78,10 +75,7 @@
                     android:src="@drawable/default_img" />
 
             </RelativeLayout>
-
-
         </LinearLayout>
-
 
         <!-- 정보 수정 섹션 -->
         <LinearLayout
@@ -98,20 +92,21 @@
                 android:gravity="center_vertical">
 
                 <TextView
-                    android:layout_width="wrap_content"
+                    android:id="@+id/txtName"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
+                    android:layout_weight="1"
                     android:text="성명: 김민지"
-                    android:textSize="16sp"
-                    android:layout_weight="1" />
+                    android:textSize="16sp" />
 
-                <Button
+                <!--<Button
                     android:id="@+id/edtName"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="변경하기"
                     android:textSize="14sp"
                     android:backgroundTint="@color/blue"
-                    android:textColor="@color/white" />
+                    android:textColor="@color/white" /> -->
             </LinearLayout>
 
             <!-- 연락처 -->
@@ -123,14 +118,15 @@
                 android:layout_marginTop="8dp">
 
                 <TextView
-                    android:layout_width="wrap_content"
+                    android:id="@+id/txtPhone"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
+                    android:layout_weight="1"
                     android:text="연락처: 010.8446.2663"
-                    android:textSize="16sp"
-                    android:layout_weight="1" />
+                    android:textSize="16sp" />
 
                 <Button
-                    android:id="@+id/edtPhone"
+                    android:id="@+id/btnEditPhone"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="변경하기"
@@ -139,7 +135,7 @@
                     android:textColor="@color/white" />
             </LinearLayout>
 
-            <!-- 주소 -->
+            <!-- 보호자 이름 -->
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -148,14 +144,15 @@
                 android:layout_marginTop="8dp">
 
                 <TextView
-                    android:layout_width="wrap_content"
+                    android:id="@+id/txtGuardianName"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:text="주소: 경기도 수원시 권선구 탐동"
-                    android:textSize="16sp"
-                    android:layout_weight="1" />
+                    android:layout_weight="1"
+                    android:text="보호자명:"
+                    android:textSize="16sp" />
 
                 <Button
-                    android:id="@+id/edtAdress"
+                    android:id="@+id/btnEditGuardianName"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="변경하기"
@@ -164,7 +161,7 @@
                     android:textColor="@color/white" />
             </LinearLayout>
 
-            <!-- 비밀번호 -->
+            <!-- 보호자 전화번호 -->
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -173,14 +170,39 @@
                 android:layout_marginTop="8dp">
 
                 <TextView
-                    android:layout_width="wrap_content"
+                    android:id="@+id/txtGuardianPhone"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:text="비밀번호: **********"
-                    android:textSize="16sp"
-                    android:layout_weight="1" />
+                    android:layout_weight="1"
+                    android:text="보호자 전화번호:"
+                    android:textSize="16sp" />
 
                 <Button
+                    android:id="@+id/btnEditGuardianPhone"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="변경하기"
+                    android:textSize="14sp"
+                    android:backgroundTint="@color/blue"
+                    android:textColor="@color/white" />
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center_vertical"
+                android:layout_marginTop="8dp">
+
+                <TextView
                     android:id="@+id/edtPassword"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="비밀번호:"
+                    android:textSize="16sp" />
+
+                <Button
+                    android:id="@+id/btnedtPassword"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="변경하기"
@@ -188,35 +210,6 @@
                     android:backgroundTint="@color/blue"
                     android:textColor="@color/white" />
             </LinearLayout>
-        </LinearLayout>
-
-        <!-- 추가 항목 -->
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:padding="20dp">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:text="보호자"
-                android:textSize="20dp"
-                android:layout_marginBottom="16dp"
-                />
-            <LinearLayout
-                android:id="@+id/layoutDynamic"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="16dp"
-                android:orientation="vertical" />
-            <Button
-                android:id="@+id/buttonAdd"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="+"
-                android:layout_gravity="center"
-                android:backgroundTint="@color/blue"/>
         </LinearLayout>
     </LinearLayout>
 </ScrollView>

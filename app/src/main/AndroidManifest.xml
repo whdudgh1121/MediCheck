@@ -26,10 +26,10 @@
         </activity>
 
         <!-- 기존 MainActivity -->
-        <activity android:name=".MainActivity" android:exported="true" />
-        <activity android:name=".SearchBox" />
-        <activity android:name=".MyPageActivity" />
-
+        <activity android:name=".MainActivity" />
+        <activity android:name=".SearchBox"  />
+        <activity android:name=".MyPageActivity"  />
+        <activity android:name=".TreatmentHistoryActivity"  />
 
     </application>
 </manifest>
