@@ -23,8 +23,7 @@
             android:background="@null"
             android:scaleType="fitCenter"
             android:src="@drawable/medicheck_logo"
-            android:contentDescription="앱 로고"
-            />
+            android:contentDescription="앱 로고" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -43,7 +42,7 @@
             android:src="@drawable/menu_bar"
             android:scaleType="fitCenter"
             android:contentDescription="메뉴 버튼"
-            android:background="@null"/>
+            android:background="@null" />
     </LinearLayout>
 
     <!-- 구분선 -->
@@ -53,82 +52,20 @@
         android:layout_height="61dp"
         android:background="@color/white"
         app:iconifiedByDefault="false"
-        app:queryHint="검색어를 입력하시오"
-        />
+        app:queryHint="검색어를 입력하시오" />
+
     <View
         android:layout_width="match_parent"
-        android:layout_height="10dp"
-        />
+        android:layout_height="10dp" />
 
-    <!--스크롤-->
-    <!--<ScrollView
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1">
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:padding="20dp">
-
-            <TextView
-                android:id="@+id/tvChoice1"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
-                android:text="진료과 선택항목"
-                android:textSize="25sp" />
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="9">
-
-                <Spinner
-                    android:id="@+id/spinner_departments"
-                    android:layout_width="0dp"
-                    android:layout_height="48dp"
-                    android:layout_weight="8"
-                    android:spinnerMode="dropdown"
-
-                    android:textSize="22sp" />
-
-
-
-            </LinearLayout>
-
-            <TextView
-                android:id="@+id/tvChoice2"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
-                android:text="진료과 선택항목"
-                android:textSize="25sp" />
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="9">
-
-                <Spinner
-                    android:id="@+id/spinner_diseases"
-                    android:layout_width="0dp"
-                    android:layout_height="48dp"
-                    android:layout_weight="8"
-                    android:spinnerMode="dropdown"
-                    android:textSize="22sp" />
-
-            </LinearLayout>
-        </LinearLayout>
-    </ScrollView>
-
+    <!-- 버튼 영역 -->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         android:backgroundTint="#f5f5f5"
         android:padding="20dp">
+
         <Button
             android:id="@+id/btn_check"
             android:layout_width="match_parent"
@@ -137,7 +74,6 @@
             android:backgroundTint="@color/blue"
             android:text="진료 내역 확인하기"
             android:textColor="#FFFFFF"
-            android:textSize="18sp" /
-
-    </LinearLayout>-->
+            android:textSize="18sp" />
+    </LinearLayout>
 </LinearLayout>

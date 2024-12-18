@@ -49,15 +49,15 @@ public class LoginActivity extends AppCompatActivity {
         editTextPassword = findViewById(R.id.editTextPassword);
         btnLogin = findViewById(R.id.Btnlogin);
         btnJoin = findViewById(R.id.BtnJoin);
-        btnTest = findViewById(R.id.btnTest);
+        //btnTest = findViewById(R.id.btnTest);
 
         // Test 버튼 클릭
-        btnTest.setOnClickListener(v -> {
+        /*btnTest.setOnClickListener(v -> {
             Log.d("ButtonTest", "Test button clicked");
             Intent intent = new Intent(LoginActivity.this, MainActivity.class);
             startActivity(intent);
             finish();
-        });
+        });*/
 
         // 로그인 버튼 클릭
         btnLogin.setOnClickListener(v -> {
@@ -147,7 +147,7 @@ public class LoginActivity extends AppCompatActivity {
                 params.put("birth", birth);
                 params.put("phone", phone);
                 params.put("password", password);
-                params.put("sex", gender);
+                params.put("gender", gender);
                 int currentYear = Calendar.getInstance().get(Calendar.YEAR);
                 int age = currentYear - Integer.parseInt(birth.substring(0, 4));
                 params.put("age", String.valueOf(age));
