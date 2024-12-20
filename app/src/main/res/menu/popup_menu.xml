@@ -1,0 +1,8 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/search_box"
+        android:title="진료 내역 확인하기" />
+    <item
+        android:id="@+id/menu_profile"
+        android:title="프로필 / 비상연락처 등록" />
+</menu>

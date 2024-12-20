@@ -1,0 +1,22 @@
+<!-- res/layout/popup_menu_layout.xml -->
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:padding="16dp"
+    android:background="@android:color/white"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content">
+
+    <TextView
+        android:id="@+id/search_box_item"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="진료 내역 확인하기"
+        android:padding="10dp"/>
+
+    <TextView
+        android:id="@+id/menu_profile_item"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="프로필/비상연락처 등록"
+        android:padding="10dp"/>
+</LinearLayout>

@@ -8,9 +8,9 @@
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
         android:fullBackupContent="@xml/backup_rules"
-        android:icon="@mipmap/ic_launcher"
+        android:icon="@drawable/medicheck_logo"
         android:label="@string/app_name"
-        android:roundIcon="@mipmap/ic_launcher_round"
+        android:roundIcon="@drawable/medicheck_logo"
         android:supportsRtl="true"
         android:theme="@style/Theme.MediCheck"
         tools:targetApi="31">
@@ -26,7 +26,10 @@
         </activity>
 
         <!-- 기존 MainActivity -->
-        <activity android:name=".MainActivity" android:exported="true" />
+        <activity android:name=".MainActivity" />
+        <activity android:name=".SearchBox"  />
+        <activity android:name=".MyPageActivity"  />
+        <activity android:name=".TreatmentHistoryActivity"  />
 
     </application>
 </manifest>

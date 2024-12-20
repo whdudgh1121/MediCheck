@@ -9,9 +9,6 @@
     >
     <!--로고-->
     <!--아이디-->
-
-
-
     <ImageView
         android:layout_width="match_parent"
         android:layout_height="147dp"
@@ -19,7 +16,7 @@
         android:layout_marginTop="10dp"
         android:layout_marginBottom="40dp"
         android:background="@null"
-        android:src="@drawable/MediCheck_logo" />
+        android:src="@drawable/medicheck_logo"/>
 
     <EditText
         android:id="@+id/editTextId"
@@ -27,8 +24,7 @@
         android:layout_height="50dp"
         android:layout_marginLeft="20dp"
         android:layout_marginRight="20dp"
-        android:hint="아이디를 입력하세요"
-        />
+        android:hint="아이디를 입력하세요" />
 
     <EditText
         android:id="@+id/editTextPassword"
@@ -40,17 +36,18 @@
         android:inputType="textPassword"
         />
 
-    <!--로그인 버튼-->
-    <!--    <Button-->
-    <!--        android:layout_width="match_parent"-->
-    <!--        android:layout_height="wrap_content"-->
-    <!--        android:layout_marginTop="10dp"-->
-    <!--        android:layout_marginLeft="20dp"-->
-    <!--        android:layout_marginRight="20dp"-->
-    <!--        android:backgroundTint="#50bcdf"-->
-    <!--        android:text="로그인"-->
-    <!--        android:textColor="@color/white"-->
-    <!--        />-->
+    <!--로그인 버튼--><!--
+    <Button
+        android:id="@+id/btnTest"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:backgroundTint="#50bcdf"
+        android:text="테스트"
+        android:textColor="@color/white"
+        />-->
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -76,8 +73,8 @@
             android:layout_margin="5dp"
             android:backgroundTint="#50bcdf"
             android:text="가입하기"
-            android:textSize="12sp"
-            android:textColor="#ffffff"/>
+            android:enabled="true"
+            android:textSize="12sp"/>
     </LinearLayout>
 
 </LinearLayout>
